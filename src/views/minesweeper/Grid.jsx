@@ -4,8 +4,8 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 const COLOR_MAP = {
-  0: '#CCCCCC',
-  1: '#0000FF',
+  0: 'gray',
+  1: 'blue',
   2: 'green',
   3: 'red',
   4: 'purple',
@@ -75,7 +75,10 @@ class Grid extends React.Component {
           }
         }
       >
-        <Text style={{ color: cellColor }}>{cell.nbMinesAround}</Text>
+        <Text style={{ color: cellColor }}>
+          {cell.mine && '*'}
+          {!cell.mine && cell.nbMinesAround}
+        </Text>
       </View>
     );
   }
