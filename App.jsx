@@ -21,8 +21,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <View style={appViewStyle}>
-        {/* <MinesweeperScreen /> */}
-        <CptScreen />
+        <MinesweeperScreen />
+        {/* <CptScreen /> */}
       </View>
     </Provider>
   );

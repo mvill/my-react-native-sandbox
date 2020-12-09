@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
 import Grid from './Grid';
+import {initInfoGrid} from './../../store/actions/minesweeperScreenActions';
 
 const styleScreen = {
   flex: 1,
@@ -95,7 +97,25 @@ function initGrid(width, height, nbMines) {
 
   return grid;
 }
+
+@connect(
+  state => ({
+    ready: state.minesweeperScreen.ready
+  }),
+  dispatch => ({
+    dispatchInitInfoGrid: (width, height) => dispatch(initInfoGrid(width, height)),
+  })
+)
 class MinesweeperScreen extends React.Component {
+
+  componentDidMount() {
+    const height = 9;
+    const width = 9;
+    const nbMines = 10;
+    const grid = initGrid(width, height, nbMines);
+    this.props.dispatchInitInfoGrid(width, height);
+  }
+
   render() {
 
 

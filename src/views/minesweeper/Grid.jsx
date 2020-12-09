@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 
 const COLOR_MAP = {
   0: 'gray',
@@ -29,6 +30,11 @@ const styleCell = {
   alignItems: 'center',
 };
 
+@connect(
+  state => ({
+    infoGrid: state => state.minesweeperScreen.infoGrid,
+  })
+)
 class Grid extends React.Component {
 
   /*
@@ -95,6 +101,7 @@ class Grid extends React.Component {
     const { grid } = this.props;
     return (
       <View>
+        <Text>blabla {this.props.infoGrid.length}</Text>
         {grid.map((row, rowIdx) => this.renderRow(row, rowIdx))}
       </View>
     );
