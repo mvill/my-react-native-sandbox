@@ -12,7 +12,7 @@ const styleHeader = {
 };
 
 const styleContent = {
-  backgroundColor: 'green',
+  backgroundColor: '#FFDDDD',
   flex: 1,
 };
 

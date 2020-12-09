@@ -76,7 +76,7 @@ class Grid extends React.Component {
         }
       >
         <Text style={{ color: cellColor }}>
-          {cell.mine && '*'}
+          {cell.mine && 'M'}
           {!cell.mine && cell.nbMinesAround}
         </Text>
       </View>
