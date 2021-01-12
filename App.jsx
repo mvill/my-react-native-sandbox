@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
 import { createStore } from '@reduxjs/toolkit';
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import MinesweeperScreen from './src/views/minesweeper/MinesweeperScreen';
 import CptScreen from './src/views/cpt/CptScreen';
 import rootReducer from './src/store/reducers/_rootReducer';
+import HomeScreen from './src/views/home/HomeScreen';
 
 const appViewStyle = {
   marginTop: StatusBar.currentHeight,
@@ -17,13 +18,33 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
-export default function App() {
-  return (
-    <Provider store={store}>
+@connect(
+  state => ({
+    screenId: state.screenManager.screenId
+  })
+)
+class AppContent extends React.Component {
+  render() {
+    const { screenId } = this.props;
+    return (
       <View style={appViewStyle}>
-        <MinesweeperScreen />
+        {screenId === 'HOME' && <HomeScreen/>}
+        {screenId === 'MINESWEEPER' && <MinesweeperScreen/>}
+        {/* <MinesweeperScreen /> */}
         {/* <CptScreen /> */}
       </View>
-    </Provider>
-  );
+    );
+  }
+}
+
+
+export default class App extends React.Component {
+  render() {
+    const { screenId } = this.props;
+    return (
+      <Provider store={store}>
+        <AppContent />
+      </Provider>
+    );
+  }
 }
